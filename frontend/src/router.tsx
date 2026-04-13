@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  Outlet,
-  type RouteObject,
-} from 'react-router-dom';
+import { createBrowserRouter, Outlet, type RouteObject } from 'react-router-dom';
 
 type PageModule = {
   default: React.ComponentType;
@@ -59,34 +55,31 @@ const layoutModule = pageModules['./pages/_layout.tsx'];
 const Layout = layoutModule?.default ?? Outlet;
 const NotFound = pageModules['./pages/not-found.tsx']?.default;
 
-const children: RouteObject[] = Object.entries(pageModules)
-  .map(([filePath, mod]) => {
+const childEntries = Object.entries(pageModules)
+  .map<[string, RouteObject] | null>(([filePath, mod]) => {
     const routePath = toRoutePath(filePath);
 
     if (!routePath) {
       return null;
     }
 
-    const element = React.createElement(mod.default);
+    const route: RouteObject =
+      routePath === '/'
+        ? {
+            index: true,
+            element: React.createElement(mod.default)
+          }
+        : {
+            path: routePath,
+            element: React.createElement(mod.default)
+          };
 
-    if (routePath === '/') {
-      return {
-        index: true,
-        element,
-      } satisfies RouteObject;
-    }
-
-    return {
-      path: routePath,
-      element,
-    } satisfies RouteObject;
+    return [routePath, route];
   })
-  .filter((route): route is RouteObject => route !== null)
-  .sort((a, b) => {
-    const aPath = a.index ? '' : String(a.path ?? '');
-    const bPath = b.index ? '' : String(b.path ?? '');
-    return aPath.localeCompare(bPath);
-  });
+  .filter((entry): entry is [string, RouteObject] => entry !== null)
+  .sort((a, b) => a[0].localeCompare(b[0]));
+
+const children: RouteObject[] = childEntries.map(([, route]) => route);
 
 children.push({
   path: '*',
