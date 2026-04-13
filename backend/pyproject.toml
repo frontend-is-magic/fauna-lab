@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fauna-lab-backend"
+version = "0.1.0"
+description = "Backend services for the Fauna Lab local image classification app."
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.34.0",
+  "pydantic>=2.10.6",
+  "python-multipart>=0.0.20",
+  "pillow>=10.4.0",
+  "torch>=2.6.0",
+  "torchvision>=0.21.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]

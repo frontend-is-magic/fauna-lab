@@ -1,0 +1,16 @@
+name: fauna-lab
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch>=2.2
+  - torchvision>=0.17
+  - pillow>=10.0
+  - fastapi>=0.115
+  - uvicorn>=0.34
+  - pydantic>=2.10
+  - python-multipart>=0.0.20
+  - pip:
+      - -e .
