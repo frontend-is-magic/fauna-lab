@@ -18,9 +18,10 @@
 - [x] 约定式路由主链打通：`main.tsx -> App.tsx -> src/router.tsx -> src/pages/*`
 - [x] 保留 `default / zoo` 主题切换入口
 - [x] 补齐 `vite-env.d.ts`，修复 `import.meta.glob` / `import.meta.env` 类型问题
+- [x] 补齐 `Dataset` 页面真实业务 UI，包括文件夹上传、预览和外置存储设置
+- [x] 为数据集与存储设置建立前端 API 类型层
 - [ ] 为 `frontend/src/router.tsx` 增加更稳定的路由约束与测试覆盖
-- [ ] 补齐 `Dataset`、`Train`、`Inference`、`Models` 四个页面的真实业务 UI
-- [ ] 建立前端 API 类型层，避免页面直接消费裸响应
+- [ ] 补齐 `Train`、`Inference`、`Models` 三个页面的真实业务 UI
 - [ ] 跑通 `pnpm lint`
 - [ ] 跑通 `pnpm typecheck`
 
@@ -37,7 +38,8 @@
 ## 集成 TODO
 
 - [ ] 对齐前端 `fetch` 请求层与后端实际响应结构
-- [ ] 验证前端页面到后端接口的最小联调链路
+- [x] 验证 `Dataset` 页面到后端接口的最小联调链路
+- [ ] 验证其余前端页面到后端接口的最小联调链路
 - [ ] 增加 README 的本地启动说明
 - [ ] 增加 PR 检查命令说明
 
