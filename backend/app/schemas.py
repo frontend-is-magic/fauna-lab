@@ -15,6 +15,51 @@ class DatasetStatsResponse(BaseModel):
     total: int
 
 
+class UploadedImage(BaseModel):
+    filename: str
+    size_bytes: int
+
+
+class DatasetUploadResponse(BaseModel):
+    class_name: str
+    uploaded: list[UploadedImage]
+    saved_count: int
+
+
+class PreviewImage(BaseModel):
+    filename: str
+    size_bytes: int
+    preview_data_url: str
+
+
+class DatasetPreviewResponse(BaseModel):
+    class_name: str
+    total: int
+    images: list[PreviewImage]
+
+
+class DeleteClassResponse(BaseModel):
+    deleted: bool
+    class_name: str
+    removed_count: int
+
+
+class DeleteFileResponse(BaseModel):
+    deleted: bool
+    class_name: str
+    filename: str
+
+
+class StorageSettingsResponse(BaseModel):
+    storage_root: str
+    source: str
+    env_override: bool
+
+
+class StorageSettingsUpdateRequest(BaseModel):
+    storage_root: str
+
+
 class TrainRequest(BaseModel):
     model_arch: str = Field(default="resnet18")
     epochs: int = Field(default=10, ge=1)

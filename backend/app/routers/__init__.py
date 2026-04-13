@@ -1,3 +1,3 @@
-from . import dataset, inference, models, train
+from . import dataset, inference, models, settings, train
 
-__all__ = ["dataset", "inference", "models", "train"]
+__all__ = ["dataset", "inference", "models", "settings", "train"]

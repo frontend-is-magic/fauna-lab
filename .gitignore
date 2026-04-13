@@ -1,0 +1,11 @@
+.conda/
+.local/
+.tmp-config/
+backend/fauna_lab_backend.egg-info/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/routers/__pycache__/
+backend/app/services/__pycache__/
+backend/app/models/__pycache__/
+frontend/node_modules/
+frontend/dist/
