@@ -1,7 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repoRoot = Split-Path -Parent $scriptDir
+$repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $frontendDir = Join-Path $repoRoot 'frontend'
 $backendDir = Join-Path $repoRoot 'backend'
 $backendEnvDir = Join-Path $repoRoot '.conda/fauna-lab'
