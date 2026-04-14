@@ -1,8 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..") do set "REPO_ROOT=%%~fI"
+set "REPO_ROOT=%~dp0"
+if "%REPO_ROOT:~-1%"=="\" set "REPO_ROOT=%REPO_ROOT:~0,-1%"
 set "FRONTEND_DIR=%REPO_ROOT%\frontend"
 set "BACKEND_DIR=%REPO_ROOT%\backend"
 set "BACKEND_ENV_DIR=%REPO_ROOT%\.conda\fauna-lab"
@@ -51,7 +51,6 @@ echo No usable conda env found; using the active Python environment.
 start "Fauna Lab Backend" cmd /k "cd /d ""%BACKEND_DIR%"" && python -m uvicorn app.main:app --reload"
 
 :backend_started
-
 for /l %%I in (1,1,30) do (
   powershell -NoProfile -Command "try { $response = Invoke-WebRequest -Uri '%BACKEND_URL%' -UseBasicParsing -TimeoutSec 2; if ($response.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }"
   if not errorlevel 1 goto backend_ready
