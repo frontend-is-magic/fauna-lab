@@ -61,11 +61,11 @@ class StorageSettingsUpdateRequest(BaseModel):
 
 
 class TrainRequest(BaseModel):
-    model_arch: str = Field(default="resnet18")
+    model_arch: str = Field(default="vit_b_16")
     epochs: int = Field(default=10, ge=1)
     lr: float = Field(default=1e-3, gt=0)
     batch_size: int = Field(default=16, ge=1)
-    img_size: int = Field(default=224, ge=64)
+    img_size: int = Field(default=224, ge=224, le=224)
     train_split: float = Field(default=0.8, gt=0, lt=1)
 
 

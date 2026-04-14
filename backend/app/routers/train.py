@@ -1,14 +1,27 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from app.schemas import TrainHistoryResponse, TrainRequest, TrainStatusResponse
-from app.services.trainer import get_training_history, get_training_status, start_training, stop_training
+from app.services.trainer import (
+    TrainingConfigError,
+    TrainingDataError,
+    TrainingInProgressError,
+    get_training_history,
+    get_training_status,
+    start_training,
+    stop_training,
+)
 
 router = APIRouter()
 
 
 @router.post("/start")
 async def train_start(payload: TrainRequest) -> dict[str, str]:
-    return start_training(payload)
+    try:
+        return start_training(payload)
+    except TrainingInProgressError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except (TrainingDataError, TrainingConfigError, ValueError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @router.get("/status", response_model=TrainStatusResponse)
