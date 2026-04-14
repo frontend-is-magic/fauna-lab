@@ -5,6 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Working directories and commands
 
 - This repo has no top-level workspace runner. Run commands from `frontend/` or `backend/`.
+- For full local startup from the repo root, prefer the platform scripts in `scripts/`:
+  - macOS/Linux: `bash scripts/dev.sh`
+  - Windows PowerShell: `./scripts/dev.ps1`
+  - Windows cmd: `scripts\dev.bat`
+- These scripts only orchestrate the existing frontend/backend dev commands. They assume dependencies are already installed, prefer the repo-local `.conda/fauna-lab` env or a named `fauna-lab` conda env when available, and wait for backend health before starting the frontend.
 
 ### Frontend (`frontend/`)
 
